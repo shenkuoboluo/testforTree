@@ -1,78 +1,113 @@
-html, body {
-  margin: 0;
-  padding: 0;
+@charset "utf-8";
+* {
+  box-sizing: border-box;
 }
-
 body {
-  position: relative;
-  padding: 10vh;
-  background: linear-gradient(-25deg, lightblue, transparent), linear-gradient(to top, azure, AliceBlue);
-}
-
-ul {
-  text-align: center;
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  display: block;
-  font-size: 10vh;
-  line-height: 11.42vh;
-  letter-spacing: -0.1em;
-  min-width: 7.5em;
-}
-
-li {
-  display: inline-block;
-  text-shadow: 0 0 .5em green;
-}
-
-.shine {
-  text-shadow: 0 0 1em gold;
-}
-
-.trunk {
-  transform: rotate(45deg);
-  text-shadow: 0 0 1em brown;
-}
-
-#snowflakeContainer {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  display: none;
-}
-
-.snowflake {
-  position: fixed;
-  background: none;
-  user-select: none;
-  z-index: 1000;
-  pointer-events: none;
-  width: 1em;
-  height: 1em;
-  font-size: 1.5em;
-  color: #fff;
-  text-shadow: 0 0 20px CornflowerBlue;
-}
-
-.follow {
+  background: #233343;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+.tree {
+  position: relative;
+  height: 50vmin;
+  width: 25vmin;
+  transform-style: preserve-3d;
+  -webkit-animation: spin 2s infinite linear;
+          animation: spin 2s infinite linear;
+}
+.tree__light {
+  transform-style: preserve-3d;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 1em;
-  text-decoration: none;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: #1DA1F2;
+  height: 1vmin;
+  width: 1vmin;
+  border-radius: 50%;
+  -webkit-animation: flash calc(var(--speed) * 1s) calc(var(--delay) * 1s) infinite steps(4), appear 0.5s calc(var(--appear) * 0.05s) both;
+          animation: flash calc(var(--speed) * 1s) calc(var(--delay) * 1s) infinite steps(4), appear 0.5s calc(var(--appear) * 0.05s) both;
+  left: 50%;
+  transform: translate(-50%, 50%) rotateY(calc(var(--rotate, 0) * 1deg)) translate3d(0, 0, calc(var(--radius, 0) * 1vmin));
+  bottom: calc(var(--y, 0) * 1%);
 }
-
-.follow:hover {
-  text-decoration: underline;
-  color: #14171A;
+.tree__star {
+  stroke-width: 5vmin;
+  stroke: #f5e0a3;
+  filter: drop-shadow(0 0 2vmin #fcf1cf);
+  height: 5vmin;
+  width: 5vmin;
+  overflow: visible !important;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: absolute;
+  stroke-dasharray: 1000 1000;
+  fill: none;
+  -webkit-animation: stroke 1s calc((var(--delay) * 0.95) * 0.05s) both;
+          animation: stroke 1s calc((var(--delay) * 0.95) * 0.05s) both;
 }
-
-.follow svg {
-  height: 1em;
-  margin-right: .1em;
+@-webkit-keyframes stroke {
+  from {
+    stroke-dashoffset: -1000;
+  }
+}
+@keyframes stroke {
+  from {
+    stroke-dashoffset: -1000;
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+@-webkit-keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes flash {
+  0%, 100% {
+    background: #4f60f6;
+  }
+  20% {
+    background: #f64f4f;
+  }
+  40% {
+    background: #4fecf6;
+  }
+  60% {
+    background: #f6db4f;
+  }
+  80% {
+    background: #f64fe5;
+  }
+}
+@keyframes flash {
+  0%, 100% {
+    background: #4f60f6;
+  }
+  20% {
+    background: #f64f4f;
+  }
+  40% {
+    background: #4fecf6;
+  }
+  60% {
+    background: #f6db4f;
+  }
+  80% {
+    background: #f64fe5;
+  }
 }
